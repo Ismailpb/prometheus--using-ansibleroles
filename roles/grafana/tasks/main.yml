@@ -1,0 +1,24 @@
+---
+- name: Add OSS repo
+  yum_repository:
+    name: grafana
+    description: "Adding new OSS repo for grafana"
+    baseurl: "https://packages.grafana.com/oss/rpm"
+    repo_gpgcheck: yes
+    enabled: yes
+    gpgcheck: yes
+    gpgkey: "https://packages.grafana.com/gpg.key"
+    sslverify: yes
+    sslcacert: "/etc/pki/tls/certs/ca-bundle.crt"
+    state: present
+
+- name: "Install Grafana"
+  yum:
+    name: grafana
+    state: present
+
+- name: "start / enable service"
+  service:
+    name: grafana-server
+    state: restarted
+    enabled: true

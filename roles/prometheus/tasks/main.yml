@@ -1,0 +1,39 @@
+---
+  - name: " Installing Prometheus"
+    unarchive:
+      src: "{{ prom_url }}"
+      dest: "/opt/"
+      remote_src: true
+
+  - name: "Copying the files"
+    copy:
+      src: "/opt/prometheus-{{ version_prom }}/prometheus"
+      dest: "/usr/local/bin/prometheus"
+      remote_src: true
+      owner: root
+      group: root
+      mode: 0755
+
+
+  - name: "Copying config file"
+    template:
+      src: "prometheus.config.tmpl"
+      dest: "/opt/prometheus-{{ version_prom }}/prometheus.yml"
+      owner: root
+      group: root
+
+  - name: "Creating systemd service for prometheus service"
+    template:
+      src: "prometheus.service.tmpl"
+      dest: "/etc/systemd/system/prometheus.service"
+      owner: root
+      group: root
+      mode: 0600
+
+
+  - name: "configure systemd"
+    systemd:
+      daemon_reload: true
+      enabled: true
+      state: started
+      name: prometheus.service
