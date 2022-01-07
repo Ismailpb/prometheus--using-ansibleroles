@@ -77,4 +77,4 @@ ansible-playbook -i hosts install-prometheus-grafana.yml
 
 #### Grafana
 
-![image](https://user-images.githubusercontent.com/93197553/148278012-ed9e9373-10ba-486c-b827-4e119eeb81d1.png)
+![image](https://github.com/Ismailpb/prometheus-using-ansibleroles/blob/c0980940c891a8353448c6dede77158921a06ca3/Untitled%20Project(3).png)
